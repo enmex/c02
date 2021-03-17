@@ -1,9 +1,13 @@
 #pragma once
+#include "Iterator.h"
 class RingBuffer
 {
+	friend class Iterator;
 private:
 	int size;
-	int* array;
+	int* a;
+	int buf;
+	int tail;
 public:
 	RingBuffer();
 	RingBuffer(int);
