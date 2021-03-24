@@ -5,15 +5,16 @@ class RingBuffer
 	friend class Iterator;
 private:
 	int size;
+    int buf_size;
 	int* a;
-	int buf;
+	int head;
 	int tail;
 public:
 	RingBuffer();
 	RingBuffer(int);
+    RingBuffer(int, int);
 	~RingBuffer();
 	void pushEnd(int);
-	void pushBegin(int);
 	int getElem();
 	int takeElem();
 	int getSize();

@@ -2,12 +2,12 @@
 #include "RingBuffer.h"
 class Iterator
 {
+    friend class RingBuffer;
 private:
 	int i;
-	const RingBuffer ringBuffer;
+	RingBuffer &ringBuffer;
 public:
-	Iterator();
-	Iterator(const RingBuffer);
+	Iterator(RingBuffer&);
 	~Iterator();
 	void start();
 	void next();
