@@ -14,7 +14,7 @@ RingBuffer::RingBuffer(int buf_size)
 	this->size = 0;
     this->buf_size = buf_size;
 	a = new int[buf_size];
-	tail = -1;
+	tail = -1; //это надо чтобы при добавлении нового элемента индекс его соотвествовал значению хвоста, то есть хвост сначала нулем будет
 	head = 0;
 }
 RingBuffer::~RingBuffer()
@@ -25,12 +25,13 @@ RingBuffer::~RingBuffer()
 
 void RingBuffer::pushEnd(int value)
 {
-    if ((tail + 1) % (buf_size) && tail != -1) {
-        throw
+    if ((tail + 1) % (buf_size) == 0 && tail != -1) {
+        throw ringException(exceptionType::RING_OVERFLOW); //если у нас при увеличении указателя бросает на начало кольца то мы бросаем исключение
     }
     size++;
 	tail = (tail + 1) % (buf_size);
     a[tail] = value;
+	//увеличение размера, хвоста по модулю, присвоение значениЯ
 }
 
 int RingBuffer::getElem()
